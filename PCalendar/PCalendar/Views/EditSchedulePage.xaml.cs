@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Linq;
+using PCalendar.Models;
+using PCalendar.Services;
 
 namespace PCalendar.Views
 {

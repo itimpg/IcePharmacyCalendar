@@ -12,6 +12,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ScheduleItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\IScheduleService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ScheduleService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\EditSchedulePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,10 +27,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ScheduleListPage.xaml">
