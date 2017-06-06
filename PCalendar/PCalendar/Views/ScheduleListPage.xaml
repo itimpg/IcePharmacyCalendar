@@ -13,13 +13,14 @@
                     <StackLayout Orientation="Horizontal" Margin="13, 0">
                         <Label Text="{Binding Day}" 
                                FontSize="Large"
+                               FontAttributes="Bold"
                                VerticalOptions="Center" 
                                WidthRequest="30"/>
                         <StackLayout Orientation="Vertical"
-                                     HorizontalOptions="StartAndExpand">
+                                     HorizontalOptions="FillAndExpand">
                             <Label Text="{Binding ScheduleDate, StringFormat='{0:d MMM yyyy}'}"
-                                   FontSize="Large"/>
-                            <Label Text="13.00-15.00, 20.00-23.00"/>
+                                   FontAttributes="Bold"/>
+                            <Label Text="{Binding Description}"/>
                         </StackLayout>
                     </StackLayout>
                 </ViewCell>

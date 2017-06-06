@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCalendar.Extensions.TimeCell">
+    <StackLayout Orientation="Horizontal" Margin="17, 0">
+        <Label Text="{Binding Label}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+        <TimePicker Time="{Binding Time}" IsEnabled="{Binding IsEnabled}" Format="HH:mm"/>
+    </StackLayout>
+</ViewCell>

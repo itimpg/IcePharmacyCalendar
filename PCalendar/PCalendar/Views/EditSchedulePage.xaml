@@ -1,29 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ext="clr-namespace:PCalendar.Extensions"
              x:Class="PCalendar.Views.EditSchedulePage"
              Title="{Binding Item.ScheduleDate, StringFormat='{0:d MMM yyyy}'}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="เสร็จ" Activated="DoneToolbarItem_Activated"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="13, 5">
-            <Picker x:Name="PickerCode1" Title="Code1"/>
-            <Picker x:Name="PickerCode2" Title="Code2"/>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="ไปร้านยา" HorizontalOptions="StartAndExpand"/>
-                <Switch x:Name="SwitchIsPharmacy"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="ตั้งแต่" HorizontalOptions="StartAndExpand"/>
-                <TimePicker x:Name="TimeFrom" 
-                            IsVisible="{Binding Source={x:Reference SwitchIsPharmacy}, Path=IsToggled}" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="ถึง" HorizontalOptions="StartAndExpand"/>
-                <TimePicker x:Name="TimeTo" 
-                            IsVisible="{Binding Source={x:Reference SwitchIsPharmacy}, Path=IsToggled}" />
-            </StackLayout>
-        </StackLayout>
+        <TableView Margin="13, 5">
+            <TableRoot>
+                <TableSection Title="โรงพยาบาล">
+                    <ext:CodeCell x:Name="Code1" Label="เวร 1" Tapped="Code1_Tapped"/>
+                    <ext:CodeCell x:Name="Code2" Label="เวร 2" Tapped="Code2_Tapped"/>
+                </TableSection>
+                <TableSection Title="ร้านยา" >
+                    <SwitchCell x:Name="SwitchIsPharmacy" Text="ต้องไปร้านยา"/>
+                    <ext:TimeCell x:Name="TimeFrom" 
+                                  Label="ตั้งแต่เวลา"/>
+                    <ext:TimeCell x:Name="TimeTo"
+                                  Label="ถึงเวลา" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
     </ContentPage.Content>
 </ContentPage>
