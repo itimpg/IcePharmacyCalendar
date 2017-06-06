@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCalendar.Views.ScheduleListPage"
+             Title="ตารางเวร">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="ค้นหา" Activated="SearchToolbarItem_Activated"/>
+    </ContentPage.ToolbarItems>
+    <ListView x:Name="ScheduleList" HasUnevenRows="True" ItemSelected="ScheduleList_ItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal" Margin="13, 0">
+                        <Label Text="{Binding Day}" 
+                               FontSize="Large"
+                               VerticalOptions="Center" 
+                               WidthRequest="30"/>
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="StartAndExpand">
+                            <Label Text="{Binding ScheduleDate, StringFormat='{0:d MMM yyyy}'}"
+                                   FontSize="Large"/>
+                            <Label Text="13.00-15.00, 20.00-23.00"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
