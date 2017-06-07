@@ -2,6 +2,7 @@
 using PCalendar.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TinyIoC;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -50,9 +51,9 @@ namespace PCalendar.Views
                 descList.Add($"{Item.PharmacyFrom.ToString(@"hh\:mm")}-{Item.PharmacyTo.ToString(@"hh\:mm")}");
             }
 
-            Item.Description = string.Join(", ", descList);
+            Item.Description = string.Join(", ", descList.Where(x => !string.IsNullOrEmpty(x)));
 
-            _service.SaveItem(Item);
+            await _service.SaveScheduleItemAsync(Item);
             await Navigation.PopAsync(true);
         }
 

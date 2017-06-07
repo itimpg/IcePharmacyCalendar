@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -14,7 +15,9 @@ namespace PCalendar.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        
+
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public DateTime ScheduleDate { get; set; }
         public string Code1 { get; set; }
         public string Code2 { get; set; }

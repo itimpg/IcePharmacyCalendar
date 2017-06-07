@@ -25,6 +25,8 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\ScheduleItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\IScheduleService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Interfaces\ISQLiteDb.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SQLiteDb.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ScheduleService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\CodeListPage.xaml.cs">
       <SubType>Code</SubType>

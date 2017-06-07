@@ -19,6 +19,7 @@ namespace PCalendar.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            TinyIoCContainer.Current.Register<ISQLiteDb, SQLiteDb>();
             TinyIoCContainer.Current.Register<IScheduleService, ScheduleService>();
 
             LoadApplication(new PCalendar.App());

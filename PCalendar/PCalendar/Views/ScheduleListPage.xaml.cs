@@ -52,10 +52,10 @@ namespace PCalendar.Views
             SearchScheduleItem(DateTime.Today);
         }
 
-        public void SearchScheduleItem(DateTime dateTime)
+        public async void SearchScheduleItem(DateTime dateTime)
         {
             _scheduleItems.Clear();
-            var items = _service.GetList(dateTime);
+            var items = await _service.GetListAsync(dateTime);
             foreach (var item in items)
             {
                 _scheduleItems.Add(item);

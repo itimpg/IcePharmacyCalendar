@@ -1,36 +1,62 @@
 ﻿using PCalendar.Models;
 using PCalendar.Services.Interfaces;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PCalendar.Services
 {
     public class ScheduleService : IScheduleService
     {
-        private List<ScheduleItem> _scheduleItems;
+        private SQLiteAsyncConnection _connection;
 
-        public ScheduleService()
+        public ScheduleService(ISQLiteDb db)
         {
+            _connection = db.GetConnection();
         }
 
-        public List<ScheduleItem> GetList(DateTime dateCriteria)
+        public async Task<List<ScheduleItem>> GetListAsync(DateTime dateCriteria)
         {
-            _scheduleItems = new List<ScheduleItem>();
-            var startDate = new DateTime(dateCriteria.Year, dateCriteria.Month, 1);
-            var endDate = startDate.AddMonths(1).AddDays(-1);
-            for (var d = startDate; d <= endDate; d = d.AddDays(1))
+            try
             {
-                _scheduleItems.Add(new ScheduleItem { ScheduleDate = d });
+                var monthSource = new List<ScheduleItem>();
+                var startDate = new DateTime(dateCriteria.Year, dateCriteria.Month, 1);
+                var endDate = startDate.AddMonths(1).AddDays(-1);
+                for (var d = startDate; d <= endDate; d = d.AddDays(1))
+                {
+                    monthSource.Add(new ScheduleItem { ScheduleDate = d, Code1 = "X", Code2 = "X" });
+                }
+                
+                var dbSource = await _connection.Table<ScheduleItem>()
+                    .Where(x => x.ScheduleDate >= startDate && x.ScheduleDate <= endDate)
+                    .ToListAsync();
+
+                var leftJoin = from a in monthSource
+                               join b in dbSource on a.ScheduleDate equals b.ScheduleDate into lj
+                               from c in lj.DefaultIfEmpty()
+                               select c == null ? a : c;
+
+                return leftJoin.ToList();
             }
-            return _scheduleItems;
+            catch (Exception ex)
+            {
+                var x = ex.Message;
+                throw;
+            }
         }
 
-        public void SaveItem(ScheduleItem item)
+        public async Task SaveScheduleItemAsync(ScheduleItem item)
         {
-            // TODO: switch case code 
-            // for gen DescHospital
-            _scheduleItems.Add(item);
+            if (item.Id == 0)
+            {
+                await _connection.InsertAsync(item);
+            }
+            else
+            {
+                await _connection.UpdateAsync(item);
+            }
         }
 
         public string GetTimeByCode(string code)

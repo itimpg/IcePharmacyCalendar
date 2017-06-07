@@ -23,6 +23,7 @@ namespace PCalendar.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            TinyIoCContainer.Current.Register<ISQLiteDb, SQLiteDb>();
             TinyIoCContainer.Current.Register<IScheduleService, ScheduleService>();
             LoadApplication(new PCalendar.App());
 
