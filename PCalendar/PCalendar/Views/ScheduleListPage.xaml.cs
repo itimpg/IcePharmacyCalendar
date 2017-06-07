@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace PCalendar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ScheduleListPage : ContentPage
+    public partial class ScheduleListPage : ContentPage, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")

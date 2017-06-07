@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PCalendar.Views.SearchPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="SearchItem" Text="Search" />
+        <ToolbarItem x:Name="SearchItem" Text="ค้นหา" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
+    <StackLayout Margin="13, 5">
+        <Label Text="ปี"/>
         <Picker x:Name="PickerYear" Title="ปี"/>
+        <Label Text="เดือน"/>
         <Picker x:Name="PickerMonth" Title="เดือน"/>
     </StackLayout>
 </ContentPage>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converter="clr-namespace:PCalendar.Converters"
              x:Class="PCalendar.Views.ScheduleListPage"
-             Title="{Binding SearchDate, Mode=OneWay, Converter={StaticResource ThaiMonthYearConverter}}}}">
+             Title="{Binding SearchDate, Converter={StaticResource ThaiMonthYearConverter}}}}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ThaiDateConverter x:Key="ThaiDateConverter" />
@@ -13,7 +13,7 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="ค้นหา" Activated="SearchToolbarItem_Activated"/>
+        <ToolbarItem Text="เลือกเดือน" Activated="SearchToolbarItem_Activated"/>
     </ContentPage.ToolbarItems>
     <ListView x:Name="ScheduleList" HasUnevenRows="True" ItemSelected="ScheduleList_ItemSelected">
         <ListView.ItemTemplate>
@@ -23,8 +23,9 @@
                         <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
                                FontAttributes="Bold"
-                               VerticalOptions="Center" 
-                               WidthRequest="30"/>
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="40"/>
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="FillAndExpand">
                             <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDateConverter}}" 
