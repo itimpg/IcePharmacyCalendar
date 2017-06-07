@@ -15,6 +15,7 @@ namespace PCalendar.Services
         public ScheduleService(ISQLiteDb db)
         {
             _connection = db.GetConnection();
+            _connection.CreateTableAsync<ScheduleItem>();
         }
 
         public async Task<List<ScheduleItem>> GetListAsync(DateTime dateCriteria)
