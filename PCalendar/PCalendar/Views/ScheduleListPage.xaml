@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converter="clr-namespace:PCalendar.Converters"
              x:Class="PCalendar.Views.ScheduleListPage"
-             Title="{Binding SearchDate, Converter={StaticResource ThaiMonthYearConverter}}}}">
+             Title="{Binding SearchDate, Mode=OneWay, Converter={StaticResource ThaiMonthYearConverter}}}}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ThaiDateConverter x:Key="ThaiDateConverter" />

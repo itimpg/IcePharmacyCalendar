@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using PCalendar.Enums;
+using System;
 using System.Globalization;
-using PCalendar.Enums;
+using Xamarin.Forms;
 
 namespace PCalendar.Converters
 {

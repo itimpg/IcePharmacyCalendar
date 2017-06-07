@@ -1,8 +1,10 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PCalendar.Models;
+﻿using PCalendar.Models;
+using PCalendar.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using TinyIoC;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PCalendar.Views
 {
@@ -10,20 +12,25 @@ namespace PCalendar.Views
     public partial class EditSchedulePage : ContentPage
     {
         public ScheduleItem Item { get; private set; }
-
-        public EditSchedulePage() { }
+        private IScheduleService _service;
 
         public EditSchedulePage(ScheduleItem item)
         {
             InitializeComponent();
+            _service = TinyIoCContainer.Current.Resolve<IScheduleService>();
+
             Item = item;
             BindingContext = this;
+            SetScreenValue();
+        }
 
-            Code1.Code = item.Code1 ?? "None";
-            Code2.Code = item.Code2 ?? "None";
-            SwitchIsPharmacy.On = item.IsPharmacy;
-            TimeFrom.Time = item.PharmacyFrom;
-            TimeTo.Time = item.PharmacyTo;
+        private void SetScreenValue()
+        {
+            Code1.Code = Item.Code1 ?? "X";
+            Code2.Code = Item.Code2 ?? "X";
+            SwitchIsPharmacy.On = Item.IsPharmacy;
+            TimeFrom.Time = Item.PharmacyFrom;
+            TimeTo.Time = Item.PharmacyTo;
         }
 
         async private void DoneToolbarItem_Activated(object sender, EventArgs e)
@@ -35,15 +42,8 @@ namespace PCalendar.Views
             Item.PharmacyTo = TimeTo.Time;
 
             var descList = new List<string>();
-            if (hospitalCodes.ContainsKey(Item.Code1))
-            {
-                descList.Add(hospitalCodes[Item.Code1]);
-            }
-
-            if (hospitalCodes.ContainsKey(Item.Code2))
-            {
-                descList.Add(hospitalCodes[Item.Code2]);
-            }
+            descList.Add(_service.GetTimeByCode(Item.Code1));
+            descList.Add(_service.GetTimeByCode(Item.Code2));
 
             if (Item.IsPharmacy)
             {
@@ -52,25 +52,9 @@ namespace PCalendar.Views
 
             Item.Description = string.Join(", ", descList);
 
+            _service.SaveItem(Item);
             await Navigation.PopAsync(true);
         }
-
-        public Dictionary<string, string> hospitalCodes = new Dictionary<string, string>
-        {
-            { "D", "08.00-16.00" },
-            { "D1", "08.00-17.00" },
-            { "D3", "08.00-20.00" },
-            { "D5", "08.00-18.00" },
-            { "F1", "09.00-17.00" },
-            { "F5", "09.00-21.00" },
-            { "G1", "10.00-18.00" },
-            { "G3", "10.00-20.00" },
-            { "G4", "10.00-22.00" },
-            { "B", "07.00-15.00" },
-            { "K", "15.00-23.00" },
-            { "O", "23.00-07.00" },
-            { "X", "None" },
-        };
 
         async private void Code1_Tapped(object sender, EventArgs e)
         {

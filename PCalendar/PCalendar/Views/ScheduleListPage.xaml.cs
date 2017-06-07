@@ -1,11 +1,11 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using PCalendar.Models;
-using PCalendar.Services;
+﻿using PCalendar.Models;
+using PCalendar.Services.Interfaces;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PCalendar.Views
 {
@@ -30,7 +30,6 @@ namespace PCalendar.Views
                 if (value != _searchDate)
                 {
                     _searchDate = value;
-                    SetScheduleItem(value);
                     NotifyPropertyChanged();
                 }
             }
@@ -38,25 +37,30 @@ namespace PCalendar.Views
 
         private ObservableCollection<ScheduleItem> _scheduleItems;
 
+        private IScheduleService _service;
+
         public ScheduleListPage()
         {
             InitializeComponent();
             BindingContext = this;
 
             _scheduleItems = new ObservableCollection<ScheduleItem>();
+            _service = TinyIoC.TinyIoCContainer.Current.Resolve<IScheduleService>();
+
             ScheduleList.ItemsSource = _scheduleItems;
 
-            SearchDate = DateTime.Today;
+            SearchScheduleItem(DateTime.Today);
         }
 
-        public void SetScheduleItem(DateTime dateTime)
+        public void SearchScheduleItem(DateTime dateTime)
         {
-            var service = new ScheduleService();
-            var items = service.GetList(dateTime);
+            _scheduleItems.Clear();
+            var items = _service.GetList(dateTime);
             foreach (var item in items)
             {
                 _scheduleItems.Add(item);
             }
+            SearchDate = dateTime;
         }
 
         async private void ScheduleList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -70,7 +74,13 @@ namespace PCalendar.Views
 
         async private void SearchToolbarItem_Activated(object sender, EventArgs e)
         {
-            var searchPage = new SearchPage();
+            var searchPage = new SearchPage(SearchDate);
+            searchPage.SearchToolbarItem.Clicked += async (src, arg) =>
+            {
+                this.SearchScheduleItem(searchPage.SearchDate);
+                await Navigation.PopAsync(true);
+            };
+
             await Navigation.PushAsync(searchPage, true);
         }
     }

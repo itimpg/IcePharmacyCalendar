@@ -10,7 +10,7 @@ namespace PCalendar.Extensions
             BindableProperty.Create("Label", typeof(string), typeof(TimeCell));
 
         public static readonly BindableProperty CodeProperty =
-          BindableProperty.Create("Code", typeof(string), typeof(TimeCell));
+          BindableProperty.Create("Code", typeof(string), typeof(TimeCell), "X");
 
         public string Label
         {

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using PCalendar.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using PCalendar.Models;
 
 namespace PCalendar.Services.Interfaces
 {
@@ -9,5 +8,7 @@ namespace PCalendar.Services.Interfaces
     {
         List<ScheduleItem> GetList(DateTime dateCriteria);
         void SaveItem(ScheduleItem item);
+        string GetTimeByCode(string code);
+        List<string> GetCodeList();
     }
 }

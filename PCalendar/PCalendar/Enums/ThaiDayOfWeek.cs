@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PCalendar.Enums
+﻿namespace PCalendar.Enums
 {
     public enum ThaiDayOfWeek
     {
