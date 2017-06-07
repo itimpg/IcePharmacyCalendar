@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:PCalendar.Converters"
              xmlns:ext="clr-namespace:PCalendar.Extensions"
              x:Class="PCalendar.Views.EditSchedulePage"
-             Title="{Binding Item.ScheduleDate, StringFormat='{0:d MMM yyyy}'}">
+             Title="{Binding Item.ScheduleDate, Converter={StaticResource ThaiDateConverter}}}}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ThaiDateConverter x:Key="ThaiDateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="เสร็จ" Activated="DoneToolbarItem_Activated"/>
     </ContentPage.ToolbarItems>

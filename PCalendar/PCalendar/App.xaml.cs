@@ -10,9 +10,6 @@ namespace PCalendar
         public App()
         {
             InitializeComponent();
-            var userSelectedCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentCulture = userSelectedCulture;
-
             MainPage = new NavigationPage(new ScheduleListPage());
         }
 

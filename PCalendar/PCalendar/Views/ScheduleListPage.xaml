@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:PCalendar.Converters"
              x:Class="PCalendar.Views.ScheduleListPage"
-             Title="ตารางเวร">
+             Title="{Binding SearchDate, Converter={StaticResource ThaiMonthYearConverter}}}}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ThaiDateConverter x:Key="ThaiDateConverter" />
+            <converter:ThaiDayConverter x:Key="ThaiDayConverter" />
+            <converter:ThaiMonthYearConverter x:Key="ThaiMonthYearConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="ค้นหา" Activated="SearchToolbarItem_Activated"/>
     </ContentPage.ToolbarItems>
@@ -11,14 +20,14 @@
             <DataTemplate>
                 <ViewCell>
                     <StackLayout Orientation="Horizontal" Margin="13, 0">
-                        <Label Text="{Binding Day}" 
+                        <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
                                FontAttributes="Bold"
                                VerticalOptions="Center" 
                                WidthRequest="30"/>
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="FillAndExpand">
-                            <Label Text="{Binding ScheduleDate, StringFormat='{0:d MMM yyyy}'}"
+                            <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDateConverter}}" 
                                    FontAttributes="Bold"/>
                             <Label Text="{Binding Description}"/>
                         </StackLayout>

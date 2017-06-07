@@ -1,27 +1,43 @@
 ﻿using System;
 using System.Globalization;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace PCalendar.Models
 {
-    public class ScheduleItem
+    public class ScheduleItem : INotifyPropertyChanged
     {
-        public string Day
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            get
+            if (PropertyChanged != null)
             {
-                string[] names = DateTimeFormatInfo.CurrentInfo.ShortestDayNames;
-                return names[(int)ScheduleDate.DayOfWeek];
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
+        
         public DateTime ScheduleDate { get; set; }
-
         public string Code1 { get; set; }
         public string Code2 { get; set; }
         public bool IsPharmacy { get; set; }
         public TimeSpan PharmacyFrom { get; set; }
         public TimeSpan PharmacyTo { get; set; }
 
-        public string Description { get; set; }
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                if (value != this._description)
+                {
+                    this._description = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
     }
 }
