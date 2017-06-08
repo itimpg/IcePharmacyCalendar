@@ -25,18 +25,35 @@ namespace PCalendar.Models
         public TimeSpan PharmacyFrom { get; set; }
         public TimeSpan PharmacyTo { get; set; }
 
-        private string _description;
-        public string Description
+        private string _hospitalTime;
+        public string HospitalTime
         {
             get
             {
-                return _description;
+                return _hospitalTime;
             }
             set
             {
-                if (value != this._description)
+                if (value != this._hospitalTime)
                 {
-                    this._description = value;
+                    this._hospitalTime = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        private string _pharmacyTime;
+        public string PharmacyTime
+        {
+            get
+            {
+                return _pharmacyTime;
+            }
+            set
+            {
+                if (value != this._pharmacyTime)
+                {
+                    this._pharmacyTime = value;
                     NotifyPropertyChanged();
                 }
             }

@@ -22,16 +22,24 @@
                     <StackLayout Orientation="Horizontal" Margin="13, 0">
                         <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
-                               FontAttributes="Bold"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="Center"
                                WidthRequest="40"/>
-                        <StackLayout Orientation="Vertical"
-                                     HorizontalOptions="FillAndExpand">
-                            <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDateConverter}}" 
-                                   FontAttributes="Bold"/>
-                            <Label Text="{Binding Description}"/>
-                        </StackLayout>
+                        <Label Text="{Binding ScheduleDate.Day}" 
+                               FontSize="Large"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="40"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Text="รพ. " ></Label>
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding HospitalTime}"/>
+                            <Label Grid.Column="0" Grid.Row="1" Text="ร้านยา " ></Label>
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding PharmacyTime}"/>
+                        </Grid>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

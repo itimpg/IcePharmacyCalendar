@@ -42,16 +42,15 @@ namespace PCalendar.Views
             Item.PharmacyFrom = TimeFrom.Time;
             Item.PharmacyTo = TimeTo.Time;
 
-            var descList = new List<string>();
-            descList.Add(_service.GetTimeByCode(Item.Code1));
-            descList.Add(_service.GetTimeByCode(Item.Code2));
-
-            if (Item.IsPharmacy)
+            var descList = new string[]
             {
-                descList.Add($"{Item.PharmacyFrom.ToString(@"hh\:mm")}-{Item.PharmacyTo.ToString(@"hh\:mm")}");
-            }
-
-            Item.Description = string.Join(", ", descList.Where(x => !string.IsNullOrEmpty(x)));
+                _service.GetTimeByCode(Item.Code1),
+                _service.GetTimeByCode(Item.Code2)
+            };
+            Item.HospitalTime = string.Join(", ", descList.Where(x => !string.IsNullOrEmpty(x)));
+            Item.PharmacyTime = Item.IsPharmacy ?
+                $"{Item.PharmacyFrom.ToString(@"hh\:mm")}-{Item.PharmacyTo.ToString(@"hh\:mm")}" :
+                string.Empty;
 
             await _service.SaveScheduleItemAsync(Item);
             await Navigation.PopAsync(true);
