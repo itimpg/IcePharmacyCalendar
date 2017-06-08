@@ -21,7 +21,7 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="13, 5" 
+                    <StackLayout Orientation="Horizontal" Padding="13, 7" 
                                  BackgroundColor="{Binding ScheduleDate, Converter={StaticResource HistoryColorConverter}}">
                         <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
