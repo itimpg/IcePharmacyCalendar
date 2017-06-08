@@ -4,27 +4,16 @@ using Xamarin.Forms;
 
 namespace PCalendar.Converters
 {
-    public class DayColorConverter : IValueConverter
+    class HistoryColorConverter : IValueConverter
     {
-        Color[] ColorOfWeek = new Color[]
-        {
-            Color.Salmon,
-            Color.Gold,
-            Color.Orchid,
-            Color.LightSeaGreen,
-            Color.DarkOrange,
-            Color.CornflowerBlue,
-            Color.MediumPurple
-        };
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             DateTime? date = value as DateTime?;
-            if (date.HasValue)
+            if (date.HasValue && date.Value.Date < DateTime.Today)
             {
-                return ColorOfWeek[(int)date.Value.DayOfWeek];
+                return Color.Silver;
             }
-            return Color.Gray;
+            return Color.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

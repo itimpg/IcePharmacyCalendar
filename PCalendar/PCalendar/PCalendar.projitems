@@ -13,6 +13,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DayColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\HistoryColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThaiDayConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThaiDateConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThaiMonthYearConverter.cs" />

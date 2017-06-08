@@ -10,6 +10,7 @@
             <converter:ThaiDayConverter x:Key="ThaiDayConverter" />
             <converter:ThaiMonthYearConverter x:Key="ThaiMonthYearConverter"/>
             <converter:DayColorConverter x:Key="DayColorConverter"/>
+            <converter:HistoryColorConverter x:Key="HistoryColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -20,7 +21,8 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Margin="13, 0">
+                    <StackLayout Orientation="Horizontal" Padding="13, 5" 
+                                 BackgroundColor="{Binding ScheduleDate, Converter={StaticResource HistoryColorConverter}}">
                         <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
                                VerticalOptions="Center"
