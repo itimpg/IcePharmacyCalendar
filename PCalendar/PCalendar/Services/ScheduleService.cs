@@ -29,7 +29,7 @@ namespace PCalendar.Services
                 {
                     monthSource.Add(new ScheduleItem { ScheduleDate = d, Code1 = "X", Code2 = "X" });
                 }
-                
+
                 var dbSource = await _connection.Table<ScheduleItem>()
                     .Where(x => x.ScheduleDate >= startDate && x.ScheduleDate <= endDate)
                     .ToListAsync();
@@ -69,9 +69,14 @@ namespace PCalendar.Services
             return string.Empty;
         }
 
-        public List<string> GetCodeList()
+        public List<string> GetCodeList(string filter = "")
         {
-            return hospitalCodes.Select(x => x.Key).ToList();
+            return hospitalCodes
+                .Select(x => x.Key)
+                .Where(x =>
+                    string.IsNullOrWhiteSpace(filter) ||
+                    x.ToLower().StartsWith(filter.ToLower()))
+                .ToList();
         }
 
         public Dictionary<string, string> hospitalCodes = new Dictionary<string, string>

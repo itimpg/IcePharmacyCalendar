@@ -10,6 +10,6 @@ namespace PCalendar.Services.Interfaces
         Task<List<ScheduleItem>> GetListAsync(DateTime dateCriteria);
         Task SaveScheduleItemAsync(ScheduleItem item);
         string GetTimeByCode(string code);
-        List<string> GetCodeList();
+        List<string> GetCodeList(string filter = "");
     }
 }

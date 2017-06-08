@@ -17,13 +17,15 @@ namespace PCalendar.Views
         {
             InitializeComponent();
             _service = TinyIoCContainer.Current.Resolve<IScheduleService>();
-        }
 
-        protected override void OnAppearing()
-        {
             List<string> itemsSource = _service.GetCodeList();
             CodeList.ItemsSource = itemsSource;
-            base.OnAppearing();
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<string> itemsSource = _service.GetCodeList(e.NewTextValue);
+            CodeList.ItemsSource = itemsSource;
         }
     }
 }
