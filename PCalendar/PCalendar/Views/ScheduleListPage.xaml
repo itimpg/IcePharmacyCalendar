@@ -9,6 +9,7 @@
             <converter:ThaiDateConverter x:Key="ThaiDateConverter" />
             <converter:ThaiDayConverter x:Key="ThaiDayConverter" />
             <converter:ThaiMonthYearConverter x:Key="ThaiMonthYearConverter"/>
+            <converter:DayColorConverter x:Key="DayColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -24,6 +25,7 @@
                                FontSize="Large"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="Center"
+                               TextColor="{Binding ScheduleDate, Converter={StaticResource DayColorConverter}}"
                                WidthRequest="40"/>
                         <Label Text="{Binding ScheduleDate.Day}" 
                                FontSize="Large"
