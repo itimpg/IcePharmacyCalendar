@@ -21,20 +21,28 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal" Padding="13, 7" 
-                                 BackgroundColor="{Binding ScheduleDate, Converter={StaticResource HistoryColorConverter}}">
-                        <Label Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
+                    <Grid Padding="13, 7"
+                          BackgroundColor="{Binding ScheduleDate, Converter={StaticResource HistoryColorConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" 
+                               Text="{Binding ScheduleDate, Converter={StaticResource ThaiDayConverter}}" 
                                FontSize="Large"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="Center"
                                TextColor="{Binding ScheduleDate, Converter={StaticResource DayColorConverter}}"
                                WidthRequest="40"/>
-                        <Label Text="{Binding ScheduleDate.Day}" 
+                        <Label Grid.Column="1" 
+                               Text="{Binding ScheduleDate.Day}" 
                                FontSize="Large"
                                VerticalOptions="Center"
                                HorizontalTextAlignment="Center"
                                WidthRequest="40"/>
-                        <Grid>
+                        <Grid Grid.Column="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -44,7 +52,13 @@
                             <Label Grid.Column="0" Grid.Row="1" Text="ร้านยา " ></Label>
                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding PharmacyTime}"/>
                         </Grid>
-                    </StackLayout>
+                        <Label Grid.Column="3" 
+                               Text="{Binding CodeText}" 
+                               FontSize="Large"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="40"/>
+                    </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
