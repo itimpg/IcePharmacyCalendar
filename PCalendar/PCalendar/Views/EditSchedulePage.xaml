@@ -23,8 +23,10 @@
                 <TableSection Title="ร้านยา" >
                     <SwitchCell x:Name="SwitchIsPharmacy" Text="ต้องไปร้านยา"/>
                     <ext:TimeCell x:Name="TimeFrom" 
+                                  IsEnabled="{Binding Source={x:Reference Name=SwitchIsPharmacy}, Path=On}"
                                   Label="ตั้งแต่เวลา"/>
                     <ext:TimeCell x:Name="TimeTo"
+                                  IsEnabled="{Binding Source={x:Reference Name=SwitchIsPharmacy}, Path=On}"
                                   Label="ถึงเวลา" />
                 </TableSection>
             </TableRoot>

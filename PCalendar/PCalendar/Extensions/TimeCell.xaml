@@ -4,6 +4,6 @@
              x:Class="PCalendar.Extensions.TimeCell">
     <StackLayout Orientation="Horizontal" Margin="17, 0">
         <Label Text="{Binding Label}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
-        <TimePicker Time="{Binding Time}" IsEnabled="{Binding IsEnabled}" Format="HH:mm"/>
+        <TimePicker x:Name="TimePicker" Time="{Binding Time}" IsEnabled="{Binding IsEnabled}" Format="HH:mm"/>
     </StackLayout>
 </ViewCell>

@@ -27,6 +27,10 @@ namespace PCalendar.Extensions
 
         public TimeCell()
         {
+            this.Tapped += (s, e) =>
+            {
+                TimePicker.Focus();
+            };
             InitializeComponent();
             BindingContext = this;
         }
