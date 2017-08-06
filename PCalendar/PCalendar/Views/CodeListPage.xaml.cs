@@ -20,6 +20,12 @@ namespace PCalendar.Views
 
             List<string> itemsSource = _service.GetCodeList();
             CodeList.ItemsSource = itemsSource;
+
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                //Fixes an android bug where the search bar would be hidden
+                SearchBar.HeightRequest = 40.0;
+            }
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

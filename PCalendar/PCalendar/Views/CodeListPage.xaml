@@ -4,7 +4,7 @@
              x:Class="PCalendar.Views.CodeListPage"
              Title="รหัสเวร">
     <StackLayout>
-        <SearchBar Placeholder="ค้นหารหัสเวร" TextChanged="SearchBar_TextChanged" />
+        <SearchBar x:Name="SearchBar" Placeholder="ค้นหารหัสเวร" TextChanged="SearchBar_TextChanged" />
         <ListView x:Name="CodeList" />
     </StackLayout>
 </ContentPage>
